@@ -1,0 +1,9 @@
+# aptitude install linux-headers-amd64
+
+cd ./src
+make clean
+make all
+make install
+
+modprobe -r fcpci
+modprobe -v fcpci

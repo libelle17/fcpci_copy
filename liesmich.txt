@@ -1,0 +1,102 @@
+Lutz Willek, im Februar 2014
+
+Ich bin nur ein normaler Anwender, stelle diese gepachten Sourcen 
+"So wie sie sind" zur Verfuegung, einfach weil diese bei mir sehr gut
+funktionieren. Erwarte keinen Support oder Haftung wenn Du diese Quellen
+einsetzt. Dein System: Deine Verantwortung. 
+
+Dies ist eine Version von Kernel 3.10 aufwaerts, getestet bis 3.11
+
+Update
+======
+https://belug.de/~lutz/pub/fcpci/fritz-fcpci-latest.tar.bz2
+
+Howto
+=====
+http://belug.de/hilfe-howtos-fcpci.html
+
+
+Installationsvorraussetzungen
+=============================
+
+- Die Linux-Header Deines gerade laufenden Kernels installieren, 
+  falls Du einen Distributionskernel besitzt. Besser scheint bei 
+  Problemen ein Vanilla-Kernel zu sein. Versuche es aber zuerst ruhig 
+  mit dem Distributionskernel zu arbeiten.
+  --> aptitude install linux-headers-amd64
+  --> alternativ: eigener Kernel
+
+- Das zum Kernel passende Quellpaket herunter laden. Solltest Du kein 
+  genau passendes Paket fuer Deinen Kernel finden, so versuche bitte 
+  das *naechst* *tiefere* Quellpaket. 
+  z.B: fuer Kernel 3.1 funktioniert das Quellpaket fuer 2.6.39.
+
+- Hinweis: Die Installation muss unter einem administrativen Benutzer 
+  erfolgen. 
+
+ (Ubuntu): Am einfachsten geht das wenn man in einem geoeffneten 
+    Terminalfenster den Befehl "sudo su" eingibt. (das Benutzerpasswort wird verlangt)
+
+ (Debian): Am einfachsten geht das wenn man in einem geoeffneten
+    Terminalfenster den Befehl "su" eingibt. (das rootpasswort wird verlangt)
+
+
+Hinweise zu CAPIFS
+==================
+- Aus aktuellem Anlass ab Kernel 2.6.38:
+  Ab Kernel 2.6.38 wurde capifs aus dem Kernel entfernt, daher funktioniert 
+  keine Software, die zwingend capifs benoetigt. 
+
+  Daher der Hinweis: fcpci benoetigt kein capifs um zu funktionieren. CAPI selbst 
+  muss wie bisher in den Kernel eingebaut werden, hier der Auszug der .config:
+
+  CONFIG_ISDN_CAPI=m
+  CONFIG_ISDN_CAPI_CAPI20=m
+  CONFIG_ISDN_CAPI_CAPIDRV=m 
+
+
+Installation
+============
+
+- Quellen entpacken
+
+- root werden, siehe Hinweise
+
+- Modul fuer den Kernel compilieren
+  cd ./src
+  make clean
+  make all
+
+- Modul ins System kopieren:
+ make install
+
+- Modul laden:
+ modprobe -r fcpci
+ modprobe -v fcpci
+
+- Sich freuen weil alles tut.
+
+- Mir eine Mail schicken, in der Du Deiner Huldigung Ausdruck verleihst.
+  Nein im Ernst, mich wuerde die Version Deines Kernels interressieren, 
+  ein Auszug aus dmesg nach dem laden des Moduls, Erfahrungen im Betrieb,
+  Probleme, Fragen... Wenn es einfach nur gut funktioniert: 
+  Super, sag mir auch per Mail Bescheid. Meine Mailadresse ist lutz.willek@belug.de
+
+
+History
+=======
+27.02.2014: lutz.willek@belug.de: packen fcpci-3.10.0 tar
+21.12.2013: lutz.willek@belug.de: Anpassungen der Sourcen an 3.10.0
+17.05.2013: lutz.willek@belug.de: Anpassen dkms fuer Ubuntu 13.04
+17.05.2013: lutz.willek@belug.de: Anpassungen der Sourcen an 3.8.0 (Mit Dank an Karsten Wemheuer <kwem@gmx.de>)
+12.04.2013: kwem@gmx.de: Anpassungen der Sourcen an 3.8.0
+15.02.2012: lutz.willek@belug.de: Anpassungen der Sourcen an 3.2.0
+08.01.2012: lutz.willek@belug.de: Anpassen der Dokumentation
+13.12.2011: lutz.willek@belug.de: Anpassungen der Sourcen an 2.6.39
+07.11.2010: lutz.willek@belug.de: vereinfachen des Make-Prozesses, verkleinern der Sourcen
+03.11.2010: jan.rimmek@web.de: Anpassungen der Sourcen an 2.6.34
+20.04.2010: lutz.willek@belug.de: Anpassungen der Sourcen an 2.6.31
+11.01.2009: lutz.willek@belug.de: Anpassungen der Sourcen an 2.6.28
+20.05.2008: lutz.willek@belug.de: Anpassungen der Sourcen an 2.6.25
+12.09.2007: lutz.willek@belug.de: Anpassungen der Sourcen an 2.6.22
+18.06.2006: lutz.willek@belug.de: Anpassungen der Sourcen an 2.6.18 (64 bit)
